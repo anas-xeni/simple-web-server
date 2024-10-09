@@ -51,9 +51,9 @@ pipeline {
       steps {
         script {
           // Tag the Docker image
-          sh "docker tag densikatshine/simple-web-server 887376482243.dkr.ecr.us-west-2.amazonaws.com/config-server-cicd-test:${env.BUILD_ID}-${env.GIT_COMMIT}"
+          sh "docker tag densikatshine/simple-web-server 887376482243.dkr.ecr.us-west-2.amazonaws.com/hello-world-for-spinnaker:${env.BUILD_ID}-${env.GIT_COMMIT}"
           // Push the Docker image
-          sh "docker push 887376482243.dkr.ecr.us-west-2.amazonaws.com/config-server-cicd-test:${env.BUILD_ID}-${env.GIT_COMMIT}"
+          sh "docker push 887376482243.dkr.ecr.us-west-2.amazonaws.com/hello-world-for-spinnaker:${env.BUILD_ID}-${env.GIT_COMMIT}"
         }
       }
     }
