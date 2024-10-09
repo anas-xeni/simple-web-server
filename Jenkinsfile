@@ -18,6 +18,7 @@ pipeline {
         }
       }
     }
+    
     stage('docker build'){
       steps{
         script {
@@ -25,12 +26,32 @@ pipeline {
         }
       }
     }
-    stage('docker push'){
-      steps{
+    // stage('docker push'){
+    //   steps{
+    //     script {
+    //       docker.withRegistry('https://registry.hub.docker.com', 'dockerhub') {
+    //         docker.image('densikatshine/simple-web-server').push('badconfig')
+    //       }
+    //     }
+    //   }
+    // }
+
+    stage('Login to ECR') {
+      steps {
         script {
-          docker.withRegistry('https://registry.hub.docker.com', 'dockerhub') {
-            docker.image('densikatshine/simple-web-server').push('badconfig')
-          }
+          // Login to ECR
+          sh "aws ecr get-login-password --region us-west-2 | docker login --username AWS --password-stdin 887376482243.dkr.ecr.us-west-2.amazonaws.com"
+        }
+      }
+    }
+
+    stage('Tag and Push Docker Image') {
+      steps {
+        script {
+          // Tag the Docker image
+          sh "docker tag densikatshine/simple-web-server 887376482243.dkr.ecr.us-west-2.amazonaws.com/config-server-cicd-test:${env.BUILD_ID}-${env.GIT_COMMIT}"
+          // Push the Docker image
+          sh "docker push 887376482243.dkr.ecr.us-west-2.amazonaws.com/config-server-cicd-test:${env.BUILD_ID}-${env.GIT_COMMIT}"
         }
       }
     }
