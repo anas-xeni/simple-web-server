@@ -4,7 +4,7 @@ pipeline {
     buildDiscarder(logRotator(numToKeepStr: '5'))
   }
   tools {
-    go 'go113'
+    go 'go'
   }
   stages {
     stage('go build'){
@@ -19,7 +19,7 @@ pipeline {
       }
     }
   
-  
+
     stage('docker build'){
       steps{
         script {
