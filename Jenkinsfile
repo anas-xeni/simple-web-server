@@ -18,7 +18,7 @@ pipeline {
         }
       }
     }
-    
+
     stage('docker build'){
       steps{
         script {
@@ -26,6 +26,7 @@ pipeline {
         }
       }
     }
+    
     // stage('docker push'){
     //   steps{
     //     script {
