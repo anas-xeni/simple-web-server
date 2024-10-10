@@ -7,11 +7,11 @@ pipeline {
     go 'go'
   }
   stages {
-    stage('Clean Workspace') {
-      steps {
-          cleanWs() // Clean the workspace
-      }
-    }
+    // stage('Clean Workspace') {
+    //   steps {
+    //       cleanWs() // Clean the workspace
+    //   }
+    // }
     stage('go build'){
       steps{
         script {
