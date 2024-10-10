@@ -7,6 +7,11 @@ pipeline {
     go 'go'
   }
   stages {
+    stage('Clean Workspace') {
+      steps {
+          cleanWs() // Clean the workspace
+      }
+    }
     stage('go build'){
       steps{
         script {
@@ -19,7 +24,7 @@ pipeline {
             sh 'export GOOS=linux && export GOARCH=arm64 && export CGO_ENABLED=0 && go build -a -installsuffix cgo --ldflags "-s -w" -o server'
         }
       }
-      
+
     }
   
 
