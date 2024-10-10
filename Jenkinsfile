@@ -7,11 +7,22 @@ pipeline {
     go 'go'
   }
   stages {
-    // stage('Clean Workspace') {
-    //   steps {
-    //       cleanWs() // Clean the workspace
-    //   }
-    // }
+    stage('Clean Workspace') {
+        steps {
+            cleanWs() // Clean the workspace
+        }
+    }
+    stage('Checkout') {
+        steps {
+            
+            withCredentials([usernamePassword(credentialsId: 'xeni-admin-github-creds', usernameVariable: 'GITHUB_USER', passwordVariable: 'GITHUB_PASS')]) {
+                // Clone the repository using the stored credentials
+                sh "git clone https://${GITHUB_PASS}@github.com/anas-xeni/simple-web-server ."
+            }
+
+        }
+    }
+
     stage('go build'){
       steps{
         script {
