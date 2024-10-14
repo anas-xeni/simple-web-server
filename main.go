@@ -16,7 +16,6 @@ func SayHello(greeting_summary *prometheus.SummaryVec) http.HandlerFunc {
 		start := time.Now()
 		defer r.Body.Close()
 		code := 500
-		
 
 		defer func() {
 			httpDuration := time.Since(start)
